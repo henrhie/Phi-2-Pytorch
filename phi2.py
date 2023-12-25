@@ -234,7 +234,7 @@ if __name__ == "__main__":
         "-m",
         type=int,
         default=100,
-        help="Maximum number of tokens to generate",
+        help="Maximum number of tokens to generate.",
     )
     parser.add_argument(
         "--temp",
