@@ -1,0 +1,7 @@
+.idea/
+*.ipynb
+.vscode
+*.pt
+*.pth
+weights
+__pycache__
