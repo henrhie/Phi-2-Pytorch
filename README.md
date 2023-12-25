@@ -8,7 +8,7 @@ NLP synthetic texts and filtered websites (for safety and educational value).
 When assessed against benchmarks testing common sense, language understanding,
 and logical reasoning, Phi-2 showcased a nearly state-of-the-art performance 
 among models with less than 13 billion parameters.
-[[1]](https://huggingface.co/microsoft/phi-2)
+[[Huggingface]](https://huggingface.co/microsoft/phi-2) [[Official Post]](https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/)
 
 ## Setup
 
@@ -57,7 +57,3 @@ To see a list of options run:
 ```sh
 python phi2.py --help
 ```
-
-[^1]: For more details on the model see the [blog post](
-https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/)
-and the [Hugging Face repo](https://huggingface.co/microsoft/phi-2)
