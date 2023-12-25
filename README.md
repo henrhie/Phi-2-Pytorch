@@ -33,6 +33,9 @@ To generate text with the default prompt:
 python phi2.py
 ```
 
+```
+Default prompt: What are the seven natural wonders of the world?
+```
 Should give the output:
 
 ```
@@ -58,5 +61,3 @@ python phi2.py --help
 [^1]: For more details on the model see the [blog post](
 https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/)
 and the [Hugging Face repo](https://huggingface.co/microsoft/phi-2)
-
-[References](https://github.com/ml-explore/mlx-examples/blob/main/llms/phi2)
