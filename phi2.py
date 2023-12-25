@@ -248,7 +248,7 @@ if __name__ == "__main__":
         "-d",
         help="Device to run inference on.",
         type=str,
-        default="mps",
+        default="cpu",
     )
     parser.add_argument(
         "--seed",
