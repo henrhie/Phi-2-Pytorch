@@ -1,11 +1,12 @@
-import torch
-import torch.nn as nn
-from pathlib import Path
+import argparse
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Optional, Tuple
+
+import torch
+import torch.nn as nn
 from transformers import AutoTokenizer
-import argparse
 
 from inference import generate
 
@@ -205,13 +206,15 @@ class Phi2CausalModel(nn.Module):
         return self.lm_head(y), cache
 
 
-def load_weights_and_tokenizer(path: str):
-    model_ = Phi2CausalModel(ModelArgs())
-    path = Path(path) / 'phi2-weights.pt'
-    if not path.exists():
+def load_weights_and_tokenizer(path: str, device: str = "mps"):
+    model_ = Phi2CausalModel(ModelArgs(), device=device)
+    path_ = Path(path) / 'phi2-weights.pt'
+    path = Path(path)
+    if not path_.exists():
         raise Exception('model weights does not exist in directory ' + str(path))
     print('[INFO] Updating model with weights')
-    model_.load_state_dict(torch.load(str(path)))
+    _model_ = torch.load(str(path / "phi2-weights.pt"))
+    model_.load_state_dict(_model_)
     tokenizer_ = AutoTokenizer.from_pretrained("microsoft/phi-2", trust_remote_code=True)
     return model_, tokenizer_
 
@@ -260,15 +263,13 @@ if __name__ == "__main__":
 
     args_ = parser.parse_args()
     torch.manual_seed(args_.seed)
-    model, tokenizer = load_weights_and_tokenizer(args_.model_path)
+    model, tokenizer = load_weights_and_tokenizer(args_.model_path, args_.device)
 
     prompt = tokenizer(
         args_.prompt,
         return_attention_mask=False,
     )["input_ids"]
     prompt = torch.as_tensor(prompt, dtype=torch.int32, device=args_.device)
-
-    model = model.to(args_.device)
 
     print("[INFO] Starting Generation", flush=True)
     print(args_.prompt, end="", flush=True)
